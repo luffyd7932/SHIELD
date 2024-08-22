@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Text</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #1d2b3a;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .navbar {
+            background-color: #202528;
+            color: white;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+
+        @media (max-width: 768px) {
+            .nav-item {
+                width: 100%;
+                text-align: center;
+                margin: 10px 0;
+            }
+        }
+
+        .container-main {
+            margin-top: 80px; /* Adjust based on the height of the navbar */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            flex-direction: column;
+        }
+
+        #textForm {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+            border: 1px solid white;
+            border-radius: 10px;
+            background: #2e3b4e;
+            max-width: 400px; /* Increased max-width */
+            width: 100%; /* Ensure it takes full width */
+        }
+
+        .inputBox {
+            position: relative;
+            width: 100%;
+            margin: 20px 0; /* Increased margin */
+        }
+
+        .inputBox input {
+            width: 100%;
+            padding: 15px; /* Increased padding */
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: #1d2b3a;
+            border-radius: 5px;
+            outline: none;
+            color: #fff;
+            font-size: 1.2em; /* Increased font-size */
+            transition: 0.5s;
+        }
+
+        .inputBox span {
+            position: absolute;
+            left: 15px; /* Adjusted for increased padding */
+            top: 15px; /* Adjusted for increased padding */
+            pointer-events: none;
+            font-size: 1.2em; /* Increased font-size */
+            color: rgba(255, 255, 255, 0.25);
+            text-transform: uppercase;
+            transition: 0.5s;
+        }
+
+        .inputBox input:valid ~ span,
+        .inputBox input:focus ~ span {
+            color: #00dfc4;
+            transform: translateX(15px) translateY(-20px); /* Adjusted for increased padding and font-size */
+            font-size: 0.75em; /* Increased font-size */
+            padding: 0 10px;
+            background: #1d2b3a;
+            border-left: 1px solid #00dfc4;
+            border-right: 1px solid #00dfc4;
+            letter-spacing: 0.2em;
+        }
+
+        .inputBox input:valid,
+        .inputBox input:focus {
+            border: 1px solid #00dfc4;
+        }
+
+        .inputBox:nth-child(1) input:valid ~ span,
+        .inputBox:nth-child(1) input:focus ~ span {
+            background: #00dfc4;
+            color: #1d2b3a;
+            border-radius: 2px;
+        }
+
+        .inputBox:nth-child(2) input:valid ~ span,
+        .inputBox:nth-child(2) input:focus ~ span {
+            background: #00dfc4;
+            color: #1d2b3a;
+            border-radius: 2px;
+        }
+
+        button {
+            padding: 12px 20px; /* Increased padding */
+            background-color: #0083fd;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1em; /* Increased font-size */
+        }
+
+
+        h1 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 2em; /* Increased font-size */
+        }
+
+        #responseData {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #00dfc4;
+            border-radius: 10px;
+            background: #2e3b4e;
+            color: #fff;
+            display: none;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .nav-item {
+                width: 100%;
+                text-align: center;
+                margin: 10px 0;
+            }
+        }
+
+        .viewReport a{
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #00dfc4;
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">S.H.I.E.L.D</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('sms') }}">SMS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Email</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Calls</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Add On</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Settings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container container-main">
+        <h1>Welcome, {{ user.name }}</h1>
+        <form id="textForm">
+            <div class="inputBox">
+                <input type="text" id="text_box_1" name="text_box_1" required maxlength="100" oninput="checkWordCount(this, 20)">
+                <span>Sender</span>
+            </div>
+            <div class="inputBox">
+                <input id="text_box_2" name="text_box_2" required maxlength="1500" oninput="checkWordCount(this, 300)">
+                <span>Content</span>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+        <span class="viewReport"><a href="{{ url_for('view_entries_email') }}">View Reports</a></span>
+    </div>
+
+    <div id="responseData">
+        <p id="responseText"></p>
+        <p id="classificationText"></p>
+        <p id="senderVerificationText"></p>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function checkWordCount(element, maxWords) {
+            const words = element.value.split(/\s+/).filter(word => word.length > 0);
+            if (words.length > maxWords) {
+                const truncated = words.slice(0, maxWords).join(' ');
+                element.value = truncated;
+                alert(`Maximum word limit of ${maxWords} exceeded. Extra words have been removed.`);
+            }
+        }
+
+        document.getElementById('textForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch('/sms', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('classificationText').textContent = 'Classification: ' + data.classification;
+                    document.getElementById('senderVerificationText').textContent = 'Sender Verification: ' + data.sender_verification;
+                    document.getElementById('responseData').style.display = 'block';
+                    this.reset();
+                } else {
+                    document.getElementById('responseText').textContent = 'An error occurred.';
+                    document.getElementById('classificationText').textContent = '';
+                    document.getElementById('senderVerificationText').textContent = '';
+                    document.getElementById('responseData').style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('responseText').textContent = 'An error occurred. Please try again.';
+                document.getElementById('classificationText').textContent = '';
+                document.getElementById('senderVerificationText').textContent = '';
+                document.getElementById('responseData').style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>
+
+

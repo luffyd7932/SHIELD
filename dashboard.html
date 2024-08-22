@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;0,800;1,600&display=swap');
+
+
+/* variables */
+
+
+:root {
+  --color-primary: #7380ec;
+  --color-danger: #ff7782;
+  --color-success: #41f1b6;
+  --color-white: #202528;
+  --color-info-dark: #7d8da1;
+  --color-info-light: #dce1eb;
+  --color-dark: #edeffd;
+  --color-warnig: #ff4e4e;
+  --color-light: rgba(0, 0, 0, 0.4);
+  --color-primary-variant: #111e88;
+  --color-dark-variant: #677483;
+  --color-color-background: #181a1e;
+
+  --card-border-radius: 2rem;
+  --border-radius-1: 0.4rem;
+  --border-radius-2: 0.8rem;
+  --border-radius-3: 1.2rem;
+
+  --card-padding: 1.8rem;
+  --padding-1: 1.2rem;
+  --box-shadow: 0 2rem 3rem var(--color-light);
+
+}
+
+/* dark theme */
+.dark-theme-variables {
+  --color-color-background: #f6f6f9;
+  --color-white:#fff;
+  --color-light: rgba(132, 139, 200, 0.18);
+  --color-dark: #363949;
+  --color-dark-variant: #677483;
+  --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+
+
+*{
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+  border: 0;
+  text-decoration: none;
+  list-style: none;
+  appearance: none;
+}
+
+html{
+  font-size: 14px;
+}
+
+body{
+   width: 100vw;
+   height: 100vh;
+   font-size: .88rem;
+   user-select: none;
+   overflow-x: hidden;
+   background: var(--color-color-background);
+   font-family: 'Poppins', sans-serif;
+   color: var(--color-dark);
+}
+
+.container  {
+  display: grid;
+  width: 96%;
+  gap: 1.8rem;
+  grid-template-columns: 14rem auto 23rem;
+  margin: 0 auto;
+}
+
+a{
+  color: var(--color-dark);
+}
+
+h1{
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+h2{
+  font-size: 1.4rem;
+}
+h3{
+  font-size: 0.87;
+}
+h4{
+  font-weight: 0.8rem;
+}
+h5{
+  font-size: 0.77rem;
+}
+small{
+  font-size: 0.75rem;
+}
+.profile-photo img{
+  width: 2.8rem;
+  height: 2.8rem;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.text-muted{
+  color: var(--color-info-dark);
+}
+p{
+  color: var(--color-dark-variant);
+}
+b{
+  color: var(--color-dark);
+}
+.primary {
+  color: var(--color-primary);
+}
+
+.success {
+  color: var(--color-success);
+}
+
+.danger {
+  color: var(--color-danger);
+}
+
+.warning {
+  color: var(--color-warnig);
+}
+
+
+/* aside */
+ aside{
+  height: 100vh;
+ }
+
+ aside .top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.4rem;
+ }
+
+ aside .logo{
+   display: flex;
+   gap: 0.8rem;
+ }
+ aside .logo img{
+   width: 2rem;
+   height: 2rem;
+ }
+ 
+ aside .close{
+  display: none;
+ }
+
+ /* ===================
+ Sidebar
+ ================== */
+
+ aside .sidebar{
+  background: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  height: 86vh;
+  position: relative;
+  top: 3rem;
+ }
+
+ aside h3{
+  font-weight: 500;
+ }
+
+ aside .sidebar a{
+  display: flex;
+  color: var(--color-info-dark);
+  margin-left: 2rem;
+  gap: 0.8rem;
+  align-items: center;
+  position: relative;
+  height: 3.7rem;
+  transition: all 300ms ease;
+  
+ }
+
+ aside .sidebar a span{
+  font-size: 1.6rem;
+  transition: all 300ms ease; 
+ }
+
+ aside .sidebar a:last-child{
+  position: absolute;
+  bottom: 2rem; 
+  width: 100%;
+ }
+
+ aside .sidebar a.active{
+   background-color: var(--color-light);
+   color: var(--color-primary);
+   margin-left: 0;
+ }
+
+ aside .sidebar a.active::before{
+  content: "";
+  width: 6px;
+  height: 100%;
+  background: var(--color-primary);
+ }
+
+ aside .sidebar a.active span{
+  color: var(--color-primary);
+  margin-left: calc(1rem - 3px);
+ }
+
+ aside .sidebar a:hover{
+  color: var(--color-primary);
+ }
+
+ aside .sidebar a:hover span{
+  margin-left: 1rem;
+ }
+
+
+ aside .sidebar .message_count{
+   background-color: var(--color-danger);
+   color: var(--color-white);
+   padding: 2px 5px;
+   font-size: 11px;
+   border-radius: var(--border-radius-1);
+ }
+
+ /* ----------------------------
+ --------- Main--------------
+ ------------------------------ */
+
+ main{
+  margin-top: 1.4rem;
+  width: auto;
+ }
+
+ main .date input[type='date'] {
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  color: var(--color-dark);
+  
+ }
+
+ main .date{
+  display: inline-block;
+  background: var(--color-white);
+  border-radius: var(--border-radius-1);
+  margin-top: 1rem;
+  padding: 0.5rem 1.6rem;
+ }
+
+main .insights{
+   display: grid;
+   grid-template-columns: repeat(3,1fr);
+   gap: 1.6rem;
+}
+main .insights > div{
+   background-color: var(--color-white);
+   padding: var(--card-padding);
+   border-radius: var(--card-border-radius);
+   margin-top: 1rem;
+   box-shadow: var(--box-shadow);
+   transition: all .3s ease;
+}
+
+main .insights > div:hover{
+  box-shadow: none;
+}
+main .insights > div  span{
+   background: var(--color-primary);
+    padding: 0.5rem;
+     border-radius: 50%;
+     color: var(--color-white);
+     font-size: 2rem; 
+  }
+
+main .insights > div.expenses span{
+   background: var(--color-danger);
+}
+main .insights > div.income span{
+  background: var(--color-success);
+}
+
+main .insights > div .middle{
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+main .insights h3{
+  margin: 1rem 0 0.6rem;
+  font-size: 1rem;
+}
+main .insights > div .middle h1{
+  font-size: 1.6rem;
+}
+
+main h1{
+  color: var(--color-dark);
+}
+main .insights h1{
+  color: var(--color-dark);
+}
+main .insights h3{
+  color: var(--color-dark);
+}
+main .insights p{
+  color: var(--color-dark);
+}
+main .insights h3{
+  
+    color: var(--color-dark);
+  
+  
+}
+
+main .insights .progress{
+  position: relative;
+  height: 92px;
+  width: 92px;
+  border-radius: 50%;
+}
+
+.chart-container {
+            width: 100px;
+            height: 100px;
+            margin: auto;
+        }
+
+       
+
+.chart-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        
+
+main .insights svg{
+  height: 7rem;
+  width: 7rem;
+  position: absolute;
+  top: 0;
+  
+}
+
+main .insights svg circle{
+  fill: none;
+  stroke: var(--color-primary);
+   transform: rotate(270,80,80);
+   stroke-width: 8;
+   stroke-linecap: round;
+   stroke-dasharray: 85;
+   stroke-dashoffset: 0;
+
+
+}
+main .insights .sales svg circle{
+   stroke-dashoffset: 0;
+   stroke-dasharray: 85;
+}
+
+main .insights .expenses svg circle{
+  stroke-dashoffset: 0;
+  stroke-dasharray: 85;
+}
+main .insights .income svg circle{
+  stroke-dashoffset: 0;
+  stroke-dasharray: 85;
+}
+
+main .insights .expenses svg circle{
+  stroke: var(--color-danger);
+}
+
+main .insights .income svg circle{
+  stroke: var(--color-success);
+}
+
+main .insights .progress .number{
+  position: absolute;
+  top: -5px;
+  left: -4px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main .insights small{
+  margin-top: 1.3rem;
+  display: block;
+}
+
+/* recent links */
+main .recent_order{
+   margin-top: 2rem;
+}
+
+main .recent_order h2{
+    color: var(--color-dark);
+}
+
+main .recent_order h2{
+  margin-bottom: 0.8rem;
+}
+main .recent_order table{
+  background: var(--color-white);
+  width: 100%;
+  border-radius: var(--card-border-radius);
+  padding: var(--card-padding);
+  text-align: center;
+  box-shadow: var(--box-shadow);
+  transition: all .3s ease;
+  
+}
+main .recent_order table:hover{
+  box-shadow: none;
+}
+
+main table tbody td{
+   height: 2.8rem;
+   border-bottom: 1px solid var(--color-light);
+   color:var(--color-dark-variant)
+}
+main table tbody tr:last-child td {
+   border: none;
+}
+
+
+main .recent_order a{
+  text-align: center;
+  display: block;
+  margin: 1rem auto;
+  color: var(--color-primary);
+}
+
+
+/*********************
+Right Side
+**********************/
+
+.right{
+  margin-top: 1.4rem;
+}
+
+.right h2{
+  color: var(--color-dark);
+}
+
+.right .top{
+  display: flex;
+  justify-content: end;
+  gap: 2rem;
+}
+
+.right .top button{
+  display: none;
+}
+
+.right .theme-toggler{
+  background: var(--color-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 1.6rem;
+  width: 4.2rem;
+  cursor: pointer;
+  border-radius: var(--border-radius-1);
+}
+
+.right .theme-toggler span{
+  font-size: 1.2rem;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.right .theme-toggler span.active{
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: var(--border-radius-1);
+}
+
+
+.right .top .profile{
+  display: flex;
+  gap: 2rem;
+  text-align: right;
+}
+
+.info p{
+  font-size: 1.2rem;
+}
+
+.right  .info h3{
+  color: var(--color-dark);
+}
+
+.right  .item h3{
+  color: var(--color-dark);
+}
+
+/* recent update */
+
+.right .recent_updates{
+  margin-top: 1rem;
+}
+
+.right .recent_updates h2 {
+  margin-bottom: 0.8rem;
+}
+
+.right .recent_updates .updates{
+  background-color: var(--color-white);
+  padding: var(--card-padding);
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--box-shadow);
+   transition: all .3s ease;
+}
+
+.right .recent_updates .updates:hover{
+  box-shadow: none;
+}
+
+.right .recent_updates .updates .update{
+   display: grid;
+   grid-template-columns: 2.6rem auto;
+   gap: 1rem;
+   margin-bottom: 1rem;
+}
+
+
+
+
+/* see analytics */
+
+.right .sales-analytics{
+  margin-top: 2rem;
+}
+
+.right .sales-analytics h2 {
+  margin-bottom: 0.8rem;
+}
+
+
+.right .sales-analytics .item{
+  background-color: var(--color-white);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.7rem;
+  padding: 1.4rem var(--card-padding);
+  border-radius: var(--border-radius-3);
+  box-shadow: var(--box-shadow);
+  transition: all 300ms ease;
+}
+
+.right .sales-analytics .item:hover{
+  box-shadow: none;
+}
+
+.right .sales-analytics .item .right {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin: 0;
+  width: 100%;
+}
+
+.right .sales-analytics .item .icon{
+  padding: 0.6rem;
+  color: var(--color-white);
+  border-radius: 50%;
+  background: rgb(35, 143, 197);
+  display: flex;
+}
+
+
+.right .sales-analytics .item.offline .icon
+{
+  background: var(--color-danger);
+}
+.right .sales-analytics .item.customers .icon
+{
+  background: var(--color-success);
+}
+
+.right .sales-analytics .add-product{
+    background-color: transparent;
+    border: 2px dashed var(--color-primary);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   }
+
+.right .sales-analytics .add-product div{
+
+  display: flex;
+  align-items: center;
+  gap: 0.6;
+  }
+
+  .right .sales-analytics .add-product div{
+    font-weight: 600;;
+  }
+
+
+
+
+
+/* **********8
+MEDIA QUERY
+****************/
+
+@media screen and (max-width:1200px) {
+    .container{
+      width: 94%;
+      grid-template-columns: 7rem auto 23rem;
+    }
+
+    aside .logo h2{
+      display: none;
+    }
+
+    aside .sidebar h3{
+      display: none;
+    }
+    aside .sidebar a{
+      width: 5.6rem;
+    }
+
+    aside .sidebar a:last-child{
+      position: relative;
+      margin-top: 1.8rem;
+    }
+
+    main .insights{
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    main .recent_order {
+      width: 94%;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      margin: 2rem 0 0 8.8rem;
+    }
+
+    
+}
+
+/* ****************
+MEDIA QUERY PHONE
+************************/
+
+@media screen and (max-width:768px) {
+  
+  .container{
+    width: 100%;
+    grid-template-columns: 1fr;
+  }
+  
+  aside{
+    position: fixed;
+    left: -110;
+    width: 18rem;
+    z-index: 3;
+    height: 100vh;
+    box-shadow: 1rem 3rem 4rem var(--color-light);
+    background-color: var(--color-white);
+    padding-right: var(--card-padding);
+    display: none;
+    animation: showMenu 400ms ease forwards;
+  }
+  
+  @keyframes showMenu {
+
+    to{
+      left:0;
+    }
+    
+  }
+  aside .logo{
+    margin-left: 1.2rem;
+  }
+
+  aside .logo h2 {
+
+    display: inline;
+  }
+
+  aside .sidebar h3{
+    display: inline;
+  }
+
+  aside .sidebar a{
+    width: 100%;
+    height: 3.4rem;
+  }
+
+  aside .sidebar a:last-child{
+    position: absolute;
+    bottom: 5rem;
+  }
+
+  aside .close{
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  main{
+    margin-top: 7rem;
+    padding: 0 1rem;
+  }
+
+  main .recent_order{
+    position: relative;
+    margin: 3rem 0 0 0;
+    width: 100%;
+  }
+
+  main .recent_order table{
+    width: 100%;
+    margin: 0;
+  }
+
+  .right{
+    width: 94%;
+    margin: 0 auto 4rem;
+  }
+  
+    .right .top{
+       position: fixed;
+       top: 0;
+       left: 0;
+       align-items: center;
+       padding: 0 0.8rem;
+       background: var(--color-white);
+       height: 4.6rem;
+       width: 100%;
+       z-index: 2;
+       box-shadow: 0 1rem 1rem var(--color-light);
+       margin: 0;
+    }
+
+    .right .top .theme-toggler{
+      
+      width: 4.4rem;
+      position: absolute;
+      left: 60%;
+    }
+
+
+    .right .top button{
+      display: inline-block;
+      background: transparent;
+      cursor: pointer;
+      color: var(--color-dark);
+      position: absolute;
+      left: 1rem;
+
+    }
+
+    .right .top button span{
+      font-size: 2rem;
+    }
+}
+
+.logo_head{
+  color: #7380ec;
+  
+}
+
+  </style>
+</head>
+
+<body>
+   <div class="container">
+      <aside>
+           
+         <div class="top">
+           <div class="logo">
+             <h2><span class="logo_head">S.H.I.E.L.D</span> </h2>
+           </div>
+           <div class="close" id="close_btn">
+            <span class="material-symbols-outlined">
+              close
+              </span>
+           </div>
+         </div>
+         <!-- end top -->
+          <div class="sidebar">
+
+           <a href="{{ url_for('dashboard') }}" class="active">
+            <span class="material-symbols-outlined">
+              dashboard
+              </span>
+            <h3>Dashboard</h3>
+           </a>
+           <a href="{{ url_for('sms') }}">
+            <span class="material-symbols-outlined">
+              sms
+              </span>
+              <h3>SMS</h3>
+           </a>
+           <a href="#">
+            <span class="material-symbols-outlined">
+              mail
+              </span>
+              <h3>Email</h3>
+              <!--<span class="message_count">14</span>-->
+           </a>
+           <a href="#">
+            <span class="material-symbols-outlined">
+              call
+              </span>
+              <h3>Calls</h3>
+           </a>
+           <a href="#">
+              <span class="material-symbols-outlined">report_gmailerrorred </span>
+              <h3>Add On</h3>
+           </a>
+           <a href="#">
+              <span class="material-symbols-outlined">settings </span>
+              <h3>Settings</h3>
+           </a>
+           <a href="/logout">
+              <span class="material-symbols-outlined">logout </span>
+              <h3>Logout</h3>
+           </a>
+             
+          </div>
+      </aside>
+      <!-- --------------
+        end aside
+      -------------------- -->
+
+      <!-- --------------
+        start main part
+      --------------- -->
+
+      <main>
+           <h1>Dashbord</h1>
+
+
+        <div class="insights">
+
+           <!-- start sms -->
+            
+            <div class="sales">
+              <a href="{{ url_for('view_entries_sms') }}">
+              <span class="material-symbols-outlined">
+                sms
+                </span>
+               <div class="middle">
+
+                 <div class="left">
+                   <h3>Total SMS</h3>
+                   <h1>{{ total_entries }}</h1>
+                   <h3><p>Total FRAUD Entries: {{ fraud_count }}</p>
+                    <p>Total SAFE Entries: {{ safe_count }}</p></h3>
+                 </div>
+                  <div class="progress">
+                    <div class="chart-container">
+                      <canvas id="myDoughnutChart" width="300" height="300"></canvas>
+                      <div class="chart-center">
+                          <div class="chart-percentage" id="chartPercentage"></div>
+                      </div>
+                  </div>
+                  </div>
+
+               </div>
+               <small class="text-muted" >Click for details</small>
+              </a>
+            </div>
+            
+           <!-- end sms -->
+
+              <!-- start email -->
+              <div class="expenses">
+                <a href="https://example.com">
+                <span class="material-symbols-outlined">
+                  mail
+                  </span>
+                <div class="middle">
+ 
+                  <div class="left">
+                    <h3>Total Emails</h3>
+                    <h1>0</h1>
+                    <h3><p>Total FRAUD Entries: 0</p>
+                      <p>Total SAFE Entries: 0</p></h3>
+                  </div>
+                   <div class="progress">
+                       
+                   </div>
+ 
+                </div>
+                <small class="text-muted">Click for details</small>
+              </a>
+             </div>
+            <!-- end email -->
+
+               <!-- start calls -->
+               <div class="income">
+                <a href="https://example.com">
+                <span class="material-symbols-outlined">
+                  call
+                  </span>
+                <div class="middle">
+ 
+                  <div class="left">
+                    <h3>Total Calls</h3>
+                    <h1>0</h1>
+                    <h3><p>Total FRAUD Entries: 0</p>
+                      <p>Total SAFE Entries: 0</p></h3>
+                  </div>
+                   <div class="progress">
+                      
+                   </div>
+ 
+                </div>
+                <small class="text-muted">Click for details</small>
+                </a>
+             </div>
+            <!-- end calls -->
+        </div>
+       <!-- end insights -->
+
+       <!-- start recent link -->
+      <div class="recent_order">
+         <h2>Possible Threats</h2>
+         <table> 
+             <thead>
+              <tr>
+                <th>Threat Name</th>
+                <th>Threat Type</th>
+                <th></th>
+              </tr>
+             </thead>
+              <tbody>
+    
+              </tbody>
+         </table>
+         <a href="#">Show All</a>
+      </div>
+
+      </main>
+      <!------------------
+         end main
+        ------------------->
+
+      <!----------------
+        start right main 
+      ---------------------->
+    <div class="right">
+<!--start top-->
+<div class="top">
+   <button id="menu_btn">
+    <span class="material-symbols-outlined">
+      menu
+      </span>   
+   </button>
+
+   <div class="theme-toggler">
+     <span class="material-symbols-outlined active">light_mode</span>
+     <span class="material-symbols-outlined">dark_mode</span>
+   </div>
+    <div class="profile">
+       <div class="info">
+           <p><b>{{user.name}}</b></p>
+           <small class="text-muted">Admin</small>
+       </div>
+       
+   </div>
+</div>
+<!--End of Top-->
+
+<!--Start of update-->
+ <!-- <div class="recent_updates">
+     <h2>Recent Updates</h2>
+   <div class="updates">
+      <div class="update">
+         <div class="profile-photo">
+            <img src="./images/profile-4.jpg" alt=""/>
+         </div>
+        <div class="message">
+           <p><b>Spidy</b> Recived his order of USB</p>
+        </div>
+      </div>
+      <div class="update">
+        <div class="profile-photo">
+        <img src="./images/profile-3.jpg" alt=""/>
+        </div>
+       <div class="message">
+          <p><b>Ian</b> Recived his order of USB</p>
+       </div>
+     </div>
+     <div class="update">
+      <div class="profile-photo">
+         <img src="./images/profile-2.jpg" alt=""/>
+      </div>
+     <div class="message">
+        <p><b>Laxman</b> Recived his order of USB</p>
+     </div>
+   </div>
+  </div>
+  </div>-->
+<!--end of updates-->
+
+<!--start of pie-->
+
+   <div class="sales-analytics">
+     <h2>Add-On</h2>
+
+      <div class="item online">
+        <div class="icon">
+          <span class="material-symbols-outlined">sms</span>
+        </div>
+        <div class="right">
+          <div class="info">
+            <h3>Link Checker</h3>
+            <small class="text-muted"></small>
+          </div>
+          <h5 class="danger"></h5>
+          <h3></h3>
+        </div>
+      </div>
+      <div class="item offline">
+        <div class="icon">
+          <span class="material-symbols-outlined">mail</span>
+        </div>
+        <div class="right">
+          <div class="info">
+            <h3>Email Breach checker</h3>
+            <small class="text-muted"></small>
+          </div>
+          <h5 class="success"></h5>
+          <h3></h3>
+        </div>
+      </div>
+      <div class="item customers">
+        <div class="icon">
+          <span class="material-symbols-outlined">call</span>
+        </div>
+        <div class="right">
+          <div class="info">
+            <h3>File checker</h3>
+            <small class="text-muted"></small>
+          </div>
+          <h5 class="danger"></h5>
+          <h3></h3>
+        </div>
+      </div>
+  
+<!--end of pie-->
+
+
+
+   </div>
+
+
+
+   <script>
+    const  sideMenu = document.querySelector('aside');
+    const menuBtn = document.querySelector('#menu_btn');
+    const closeBtn = document.querySelector('#close_btn');
+
+
+    const themeToggler = document.querySelector('.theme-toggler');
+
+
+
+    menuBtn.addEventListener('click',()=>{
+          sideMenu.style.display = "block"
+    })
+    closeBtn.addEventListener('click',()=>{
+        sideMenu.style.display = "none"
+    })
+
+    //change theme
+    themeToggler.addEventListener('click',()=>{
+        document.body.classList.toggle('dark-theme-variables')
+        themeToggler.querySelector('span:nth-child(1').classList.toggle('active')
+        themeToggler.querySelector('span:nth-child(2').classList.toggle('active')
+    })
+
+    //orders
+
+    const orders = [
+      {
+        category: 'Facebook',
+        sender : 'SMS',
+      },
+      {
+        category: 'Instagram',
+        sender : 'SMS', 
+      },
+      {
+        category: 'Lucky Draw',
+        sender : 'SMS',
+      },
+      {
+        category: 'HDFC Fraud',
+        sender : 'SMS',
+      },
+      {
+        category: 'OLX',
+        sender : 'SMS',
+      },
+    ]
+
+    //fill orders
+
+    orders.forEach(order =>{
+      const tr = document.createElement('tr');
+      const trContent = `
+              <td>${order.category}</td>
+                   <td>${order.sender}</td>
+                   
+      `;
+
+      tr.innerHTML = trContent;
+      document.querySelector('table tbody').appendChild(tr);
+    })
+
+
+
+    function createDoughnutChart(totalEntries, safeEntries) {
+            const safePercentage = (safeEntries / totalEntries) * 100;
+            const ctx = document.getElementById('myDoughnutChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Safe', 'Fraud'],
+                    datasets: [{
+                        data: [safeEntries, totalEntries - safeEntries],
+                        backgroundColor: ['green', 'lightgrey'],
+                        borderWidth: 0, // Remove border
+                    }]
+                },
+                options: {
+                    cutout: '70%',
+                    plugins: {
+                        tooltip: false,
+                        legend: false,
+                        // Custom text in the center of the doughnut
+                        plugins: {
+                            beforeDraw: function(chart) {
+                                const width = chart.width,
+                                      height = chart.height,
+                                      ctx = chart.ctx;
+                                ctx.restore();
+                                const fontSize = (height / 160).toFixed(2);
+                                ctx.font = fontSize + "em sans-serif";
+                                ctx.textBaseline = "middle";
+                                const text = safePercentage.toFixed(0) + "%",
+                                      textX = Math.round((width - ctx.measureText(text).width) / 2),
+                                      textY = height / 2;
+                                ctx.fillText(text, textX, textY);
+                                ctx.save();
+                            }
+                        }
+                    }
+                }
+            });
+            // Display percentage below the chart
+            document.getElementById('chartPercentage').innerHTML = `Safe: ${safePercentage.toFixed(0)}%`;
+        }
+
+        // Call the function with the data passed from Flask
+        const totalEntries = {{ total_entries }};
+        const safeEntries = {{ safe_count }};
+        createDoughnutChart(totalEntries, safeEntries);
+   </script>
+</body>
+</html>
